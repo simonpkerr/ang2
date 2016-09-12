@@ -1,0 +1,14 @@
+<h1>{{ title }}</h1>
+<div [style.background] = "colour">
+  Hi there {{ userName }}
+</div>
+<!-- using inline event  (bad)  -->
+<input type="text" [value]="userName" (blur)="userName = $event.target.value">
+
+<!-- using 2-way data binding -->
+<!-- <input [(ngModel)]="userName"> -->
+
+<button (click)="changeColour()">Change colour</button>
+
+<br>
+<app-customers></app-customers>
