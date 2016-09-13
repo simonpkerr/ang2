@@ -10,3 +10,9 @@
     <app-customer [customer]="customer"></app-customer>
   </li>
 </ul>
+
+<ul>
+  <li *ngFor="let customer of customersObsSubscribe">
+    <app-customer [customer]="customer"></app-customer>
+  </li>
+</ul>

@@ -17,6 +17,7 @@ import { Observable } from 'rxjs/Rx';
 })
 export class CustomersComponent implements OnInit {
   customers: any[];
+  customersObsSubscribe: any[];
   customersObs: Observable<any[]>;
   customersPromise: Promise<any[]>;
 
@@ -29,6 +30,15 @@ export class CustomersComponent implements OnInit {
   // life-cycle function
   ngOnInit() {
 
+    // Observable with subscribe
+    this._customerService.getCustomersAsObservable() 
+      .subscribe (
+        // success path
+        (customers) => this.customersObsSubscribe = customers,
+        // error path
+        (err) => console.log(err)
+      );
+  
     // promise without async pipe way
     this._customerService.getCustomersAsPromise()
       .then ((customers) => this.customers = customers)
