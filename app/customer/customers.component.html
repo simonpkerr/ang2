@@ -1,5 +1,12 @@
 <ul>
-  <li *ngFor="let customer of customers | async">
+  <!-- async pipe only shows successful async calls -->
+  <li *ngFor="let customer of customersObs | async">
+    <app-customer [customer]="customer"></app-customer>
+  </li>
+</ul>
+
+<ul>
+  <li *ngFor="let customer of customers">
     <app-customer [customer]="customer"></app-customer>
   </li>
 </ul>

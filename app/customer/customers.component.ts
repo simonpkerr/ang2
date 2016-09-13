@@ -16,7 +16,10 @@ import { Observable } from 'rxjs/Rx';
   ]
 })
 export class CustomersComponent implements OnInit {
-  customers: Observable<any[]>;
+  customers: any[];
+  customersObs: Observable<any[]>;
+  customersPromise: Promise<any[]>;
+
 
   // typescript sugar, tells component to create a private variable
   // of type CustomerService
@@ -25,6 +28,23 @@ export class CustomersComponent implements OnInit {
 
   // life-cycle function
   ngOnInit() {
-    this.customers = this._customerService.getCustomers();
+
+    // promise without async pipe way
+    this._customerService.getCustomersAsPromise()
+      .then ((customers) => this.customers = customers)
+      .catch((err) => console.log(err));
+
+    // Promise way
+    this.customersPromise = this._customerService.getCustomersAsPromise()
+      .catch ((err) => { 
+        console.log(err);
+      });
+    
+    // rx Observable way
+    this.customersObs = this._customerService.getCustomersAsObservable()
+      .catch ((err) => { // this would also be caught if a 404 was produced
+        console.log(err);
+        return Observable.of(true); // eat the error
+      });
   }
 }
