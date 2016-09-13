@@ -1,18 +1,15 @@
 import { Injectable } from '@angular/core';
+import { Http, Response } from '@angular/http';
+import 'rxjs/Rx';
 
 @Injectable()
 export class CustomerService {
-  constructor() { }
+  constructor(private _http: Http) { }
 
   getCustomers() {
-    return [
-      { id: 1, name: 'Si' },
-      { id: 2, name: 'Bob' },
-      { id: 3, name: 'Phil' },
-      { id: 4, name: 'Mike' },
-      { id: 5, name: 'Mark' },
-      { id: 6, name: 'Pete' }
-    ];
+    return this._http.get('app/test/customers.json')
+      .map((response: Response) => response.json());
+    
   }
 }
 

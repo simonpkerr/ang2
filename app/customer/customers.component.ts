@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CustomerService } from './customer.service';
+import { Observable } from 'rxjs/Rx';
 
 @Component ({
   moduleId: module.id,
@@ -15,7 +16,7 @@ import { CustomerService } from './customer.service';
   ]
 })
 export class CustomersComponent implements OnInit {
-  customers: any[];
+  customers: Observable<any[]>;
 
   // typescript sugar, tells component to create a private variable
   // of type CustomerService
